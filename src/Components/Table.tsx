@@ -21,6 +21,13 @@ function Table() {
             SetShowForm(false)
         }
     }
+    function modifica(el:String){
+        const s = SetStudents(students.filter(obj => obj.name === el));
+        if(s){
+            SetName()
+            etc
+        }
+    }
 
     function remove(rm: String) {
         SetStudents(students.filter(obj => obj.name !== rm));
@@ -49,7 +56,7 @@ function Table() {
                                 <td>{val.age}</td>
                                 <td>{val.gender}</td>
                                 <td><button onClick={() => remove(val.name)}>Elimina</button></td>
-                                <td><button className='mod'>Modifica</button></td>
+                                <td><button onClick={() => modifica(val.name)} className='mod'>Modifica</button></td>
                             </tr>
                         )
                     })}
@@ -59,11 +66,11 @@ function Table() {
 
                 <form>
                     <label>NOME:</label><br/>
-                    <input type="text" onChange={(name) => SetName(name.target.value)}/><br/>
+                    <input type="text" onChange={(name) => SetName(name.target.value)} value={name}/><br/>
                     <label>ETA':</label><br/>
-                    <input type="text" onChange={(age) => SetAge(age.target.value)}/><br/>
+                    <input type="text" onChange={(age) => SetAge(age.target.value)}value={age}/><br/>
                     <label>GENERE:</label><br/>
-                    <input type="text" onChange={(gender) => SetGender(gender.target.value)}/><br/><br/>
+                    <input type="text" onChange={(gender) => SetGender(gender.target.value)}value={gender}/><br/><br/>
                     <button onClick={() => addStudent()}>Salva</button>
                 </form>
             
