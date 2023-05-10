@@ -12,17 +12,37 @@ table{
     box-shadow: 6px 6px 3px 3px #717171;
 }
 button{
-    border: 2px solid rgb(54, 91, 170);
-    background-color: rgb(83, 124, 214);
+    background-color: #007bff;
+    border-color: #007bff;
     color: aliceblue;
     border-radius: 5px;
     font-weight: bold;
     width: 100px;
 }
+.mod{
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: #ffffff;
+}
 th button{
-    border: 2px solid rgb(54, 170, 64);
-    background-color: rgb(83, 214, 100);
+    width: 100%;
+    background-color: #28a745;
+    border-color: #28a745;
     color: aliceblue;
     border-radius: 5px;
     font-weight: bold; 
+}
+form{
+    margin-top: 2rem;
+}
+input{
+    width: 25%;
+    height: 1.5rem;
+    border-radius: 5px;
+    border: 2px solid  #717171;
+    background-color: #71717113;
+}
+label{
+    font-weight: 400;
+    font-size: medium;
 }

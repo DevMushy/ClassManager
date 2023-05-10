@@ -40,7 +40,7 @@ function Table() {
                         <th>Name</th>
                         <th>Age</th>
                         <th>Gender</th>
-                        <th><button onClick={() => hiddenShow()}>Inserisci Studente</button></th>
+                        <th colSpan={2}><button onClick={() => hiddenShow()}>Inserisci Studente</button></th>
                     </tr>
                     {students.map((val, key) => {
                         return (
@@ -49,6 +49,7 @@ function Table() {
                                 <td>{val.age}</td>
                                 <td>{val.gender}</td>
                                 <td><button onClick={() => remove(val.name)}>Elimina</button></td>
+                                <td><button className='mod'>Modifica</button></td>
                             </tr>
                         )
                     })}
@@ -57,11 +58,11 @@ function Table() {
             {showForm && 
 
                 <form>
-                    nome:<br/>
+                    <label>NOME:</label><br/>
                     <input type="text" onChange={(name) => SetName(name.target.value)}/><br/>
-                    eta:<br/>
+                    <label>ETA':</label><br/>
                     <input type="text" onChange={(age) => SetAge(age.target.value)}/><br/>
-                    genere:<br/>
+                    <label>GENERE:</label><br/>
                     <input type="text" onChange={(gender) => SetGender(gender.target.value)}/><br/><br/>
                     <button onClick={() => addStudent()}>Salva</button>
                 </form>
