@@ -23,10 +23,11 @@ function Table() {
     }
     function modifica(el:String){
         const s = SetStudents(students.filter(obj => obj.name === el));
-        if(s){
-            SetName()
-            etc
-        }
+        if (s.length > 0) {
+            const student = s[0];
+            SetName(student.name);
+            SetAge(student.age);
+            SetGender(student.gender);
     }
 
     function remove(rm: String) {
