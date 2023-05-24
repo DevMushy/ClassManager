@@ -10,31 +10,53 @@ const data = [
 function Table() {
     const [students, SetStudents] = useState(data);
     const [showForm, SetShowForm] = useState(false);
+    const [showFormMod, SetShowFormMod] = useState(false);
     const [name, SetName] = useState("");
     const [age, SetAge] = useState("");
     const [gender, SetGender] = useState("");
+    const [studentToEdit, setStudentToEdit] = useState('');
 
-    function hiddenShow(){
-        if(!showForm){
+    function hiddenShow() {
+        if (!showForm) {
             SetShowForm(true)
-        }else{
+        } else {
             SetShowForm(false)
         }
     }
-    function modifica(el:String){
-        const s = SetStudents(students.filter(obj => obj.name === el));
-        if (s.length > 0) {
-            const student = s[0];
-            SetName(student.name);
-            SetAge(student.age);
-            SetGender(student.gender);
+    function hiddenShowMod() {
+        if (!showFormMod) {
+            SetShowFormMod(true)
+        } else {
+            SetShowFormMod(false)
+        }
     }
+
+    function modifica() {
+        for (let i = 0; i < students.length; i++) {
+            if (students[i].name == studentToEdit) {
+                students[i].name = name
+                students[i].gender = gender
+                students[i].age = parseInt(age)
+                break;
+            }
+        }
+        SetStudents(students)
+        hiddenShowMod()
+    }
+
+    function handleModClick(val: any) {
+        SetName(val.name)
+        SetAge(val.age)
+        SetGender(val.gender)
+        setStudentToEdit(val.name)
+        hiddenShowMod()
+      }
 
     function remove(rm: String) {
         SetStudents(students.filter(obj => obj.name !== rm));
     }
-    function addStudent(){
-        students.push({name:name,age:parseInt(age),gender:gender})
+    function addStudent() {
+        students.push({ name: name, age: parseInt(age), gender: gender })
         SetStudents(students)
         SetShowForm(false)
     }
@@ -57,25 +79,38 @@ function Table() {
                                 <td>{val.age}</td>
                                 <td>{val.gender}</td>
                                 <td><button onClick={() => remove(val.name)}>Elimina</button></td>
-                                <td><button onClick={() => modifica(val.name)} className='mod'>Modifica</button></td>
+                                <td><button onClick={() => handleModClick(val)} className='mod'>Modifica</button></td>
                             </tr>
                         )
                     })}
                 </table>
             </div>
-            {showForm && 
+            {showForm &&
 
                 <form>
-                    <label>NOME:</label><br/>
-                    <input type="text" onChange={(name) => SetName(name.target.value)} value={name}/><br/>
-                    <label>ETA':</label><br/>
-                    <input type="text" onChange={(age) => SetAge(age.target.value)}value={age}/><br/>
-                    <label>GENERE:</label><br/>
-                    <input type="text" onChange={(gender) => SetGender(gender.target.value)}value={gender}/><br/><br/>
+                    <label>NOME:</label><br />
+                    <input type="text" onChange={(name) => SetName(name.target.value)} value={name} /><br />
+                    <label>ETA':</label><br />
+                    <input type="text" onChange={(age) => SetAge(age.target.value)} value={age} /><br />
+                    <label>GENERE:</label><br />
+                    <input type="text" onChange={(gender) => SetGender(gender.target.value)} value={gender} /><br /><br />
                     <button onClick={() => addStudent()}>Salva</button>
                 </form>
-            
 
+
+            }
+
+            {showFormMod &&
+                            <form>
+                            <label>NOME:</label><br />
+                            <input type="text" onChange={(name) => SetName(name.target.value)} value={name} /><br />
+                            <label>ETA':</label><br />
+                            <input type="text" onChange={(age) => SetAge(age.target.value)} value={age} /><br />
+                            <label>GENERE:</label><br />
+                            <input type="text" onChange={(gender) => SetGender(gender.target.value)} value={gender} /><br /><br />
+                            <button onClick={() => modifica()}>Modifica</button>
+                        </form>
+            
             }
         </div>
     );
